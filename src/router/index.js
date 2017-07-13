@@ -8,11 +8,13 @@ import shopcart from '../components/shopcart/shopcart.vue'
 import stroll from '../components/stroll/stroll.vue'
 import firstpage from '../components/firstpage/firstpage.vue'
 import newgoods from '../components/newgoods/newgoods.vue'
+import register from '../components/register/register.vue'
 
 Vue.use(VueRouter)
 
 export default new VueRouter({
   linkActiveClass: 'active', //配置 class
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -27,7 +29,7 @@ export default new VueRouter({
           component: firstpage
         },
         {
-          path: '/homepage/newgoods',
+          path: 'newgoods',
           component: newgoods
         }
       ]
@@ -41,8 +43,12 @@ export default new VueRouter({
       component: allproducts
     },
     {
-      path: '/login',//登录注册
+      path: '/login',//登录
       component: login
+    },
+    {
+      path: '/register',  //注册
+      component: register
     },
     {
       path: '/shopcart',

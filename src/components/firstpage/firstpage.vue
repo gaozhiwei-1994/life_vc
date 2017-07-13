@@ -272,14 +272,21 @@
            </map>
          </div>
        </div>
+       <div class="toTop" v-show="true">
+         <a href="#"> &lt;</a>
+       </div>
      </div>
    </div>
 </template>
 
 <script>
-    export default {
-
+  import { Swipe, SwipeItem } from 'mint-ui';
+  export default {
+    components: {
+      'mt-swipe': Swipe,
+      'mt-swipe-item': SwipeItem
     }
+  }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
@@ -397,4 +404,21 @@
       height 1106px
       img
         width 100%
+  .toTop
+    width: 3rem;
+    height: 3rem;
+    line-height 3rem
+    background rgba(51,51,51,.3)
+    position fixed
+    right 2rem
+    bottom 6rem
+    border-radius 50%
+    text-align center
+    a
+      font-size 3rem
+      font-weight bold
+      color #ccc
+      display block
+      margin 0 auto
+      transform rotate(90deg)
 </style>

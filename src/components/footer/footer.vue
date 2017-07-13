@@ -33,13 +33,41 @@
       </div>
     </div>
     <keep-alive>
-      <router-view></router-view>
+      <router-view :products="products" :stroll="stroll"></router-view>
     </keep-alive>
   </div>
 </template>
 
 <script>
-    export default {}
+  import axios from 'axios'
+  export default {
+    data () {
+      return {
+        products: [],
+        stroll: []
+      }
+    },
+    created () {
+      axios.get('/api/all')
+        .then(response =>{
+          const result = response.data
+          //console.log(result)
+          if(result.code === 0) {
+            this.products = result.data
+          }
+        })
+
+      axios.get('/api/stroll')
+        .then(response =>{
+          const result = response.data
+          if(result.code===0){
+            this.stroll = result.data
+          }
+          //console.log(this.stroll)
+        })
+
+    }
+  }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
@@ -81,4 +109,22 @@
       .strico
         bg-image(footer_str)
 
+    .active
+      .homeico
+        bg-image(footer_home_g)
+      .allico
+        bg-image(footer_all_g)
+      .cartico
+        bg-image(footer_shopcart_g)
+      .centerico
+        bg-image(footer_usercenter_g)
+      .strico
+        bg-image(footer_str_g)
+      span
+        display: block;
+        color: #009C42;
+        line-height: .1rem;
+        font-size: 1.1rem;
+        vertical-align: bottom;
+        text-align: center;
 </style>

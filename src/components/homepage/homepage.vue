@@ -1,16 +1,16 @@
 <template>
    <div>
-     <div class="home-wrapper">
+     <div class="home-wrapper" ref="homeWrapper">
        <header class="header-wrapper">
          <div class="header">
            <router-link to="/allproducts">
              <span class="header-search"></span>
            </router-link>
          </div>
-         <div class="menu-wrapper">
+         <div class="menu-wrapper" ref="menuList">
            <ul class="menu-list" style="width: 800px;">
              <li class="font-large selected">
-               <router-link to="/">首页</router-link>
+               <router-link to="/homepage">首页</router-link>
              </li>
              <li class="font-large">
                <router-link to="/homepage/newgoods">新品</router-link>
@@ -27,18 +27,28 @@
          </div>
        </header>
        </div>
+
      <router-view></router-view>
      </div>
 </template>
 
 <script>
-  import { Swipe, SwipeItem } from 'mint-ui';
-    export default {
-      components: {
-        'mt-swipe': Swipe,
-        'mt-swipe-item': SwipeItem
-      }
+  import BScroll from 'better-scroll'
+  export default {
+    created () {
+      this.$nextTick(() =>{
+        new BScroll (this.$refs.homeWrapper,{
+          probeType: 3,
+          click: true,
+        })
+        new BScroll (this.$refs.menuList,{
+          probeType: 3,
+          click: true,
+          scrollX: 'true'
+        })
+      })
     }
+  }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
@@ -75,7 +85,6 @@
         width: 100%
         height: 4rem
         overflow: hidden
-        overflow-x scroll
         background white
         .menu-list
           height 4rem
@@ -91,9 +100,9 @@
               display: block;
               line-height: 3.8rem;
               font-size: 2rem;/*1.35*/
-          .selected
-            border-bottom 2px solid #80B532
-            a
-              color: #80B532
 
+          .active
+              border-bottom 2px solid #80B532
+              a
+                color: #80B532
 </style>

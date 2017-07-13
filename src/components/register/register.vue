@@ -7,7 +7,7 @@
           </router-link>
         </div>
         <div class="bottom">
-          <div class="register-wrapper" v-show="isShow">
+          <div class="register-wrapper" v-show="isIf">
             <h1>新用户注册</h1>
             <div class="register-content">
               <form action="">
@@ -37,7 +37,7 @@
             </div>
           </div>
 
-          <div class="login-wrapper" v-show="!isShow">
+          <div class="login-wrapper" v-show="!isIf">
             <h1>老用户登录</h1>
             <div class="register-content">
               <form action="">
@@ -71,16 +71,16 @@
   export default {
     data () {
       return{
-        isShow: false
+        isIf: true
       }
     },
     methods: {
       show (event) {
         event.preventDefault()
-        this.isShow = !this.isShow
+        this.isIf = !this.isIf
       },
       reset () {
-        this.isShow = false
+        this.isIf = true
       }
     }
   }
