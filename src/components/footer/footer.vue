@@ -2,7 +2,7 @@
   <div>
     <div class="footer">
       <div class="footer-item">
-        <router-link class="router-item" to="/homepage">
+        <router-link class="router-item" to="/homepage"><!--firstpage-->
           <div class="ico homeico"></div>
           <span>首页</span>
         </router-link>
@@ -33,7 +33,7 @@
       </div>
     </div>
     <keep-alive>
-      <router-view :products="products" :stroll="stroll"></router-view>
+      <router-view :products="allProducts" :stroll="stroll"></router-view>
     </keep-alive>
   </div>
 </template>
@@ -43,7 +43,7 @@
   export default {
     data () {
       return {
-        products: [],
+        allProducts: [],
         stroll: []
       }
     },
@@ -53,7 +53,8 @@
           const result = response.data
           //console.log(result)
           if(result.code === 0) {
-            this.products = result.data
+            this.allProducts = result.data
+            //console.log(this.products)
           }
         })
 
@@ -81,6 +82,7 @@
     background #f8f8f8
     border-top .04rem solid #ddd
     display flex
+    z-index 100
     .footer-item
       height 100%
       flex 1

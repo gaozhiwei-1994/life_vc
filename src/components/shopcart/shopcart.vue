@@ -1,9 +1,9 @@
 <template>
   <div class="cart-container">
     <header>
-      <div class="cart-back-btn"></div>
-      <span class="cart-span">购物车</span>
-    </header>
+    <router-link to="/"><div class="cart-back-btn"></div></router-link>
+    <span class="cart-span">购物车</span>
+  </header>
     <div class="cart-content">
       <div class="cart-login-wrap">
         <div class="cart-login">
@@ -13,8 +13,12 @@
       </div>
       <div class="cart-exchange-wrap">
         <div class="cart-exchange">
-          <input type="text" maxlength="15" placeholder="礼品兑换处，请输入兑换码" class="exch-ipt"><!--
-                    --><input type="button" value="兑换" class="exch-btn">
+          <input type="text" maxlength="15" placeholder="礼品兑换处，请输入兑换码"
+                 class="exch-ipt"
+                 v-model="exchContent"><!--
+
+          --><input type="button" value="兑换" class="exch-btn"
+                       @click="exchange">
         </div>
       </div>
       <div class="wrap-nodata">
@@ -137,8 +141,23 @@
 </template>
 
 <script>
+  import { MessageBox } from 'mint-ui';
   export default {
-
+    data () {
+      return {
+        exchContent: ''
+      }
+    },
+    methods: {
+      exchange () {
+        if(this.exchContent==''){
+          //alert('请填写正确的验证码')
+          MessageBox('提示','请填写正确验证码')
+        }else{
+          this.exchContent = ''
+        }
+      }
+    }
   }
 </script>
 
@@ -153,13 +172,14 @@
       line-height 46px
       width 100%
       background-color #89BE48
-      .cart-back-btn
-        float left
-        height 46px
-        width 37px
-        background url("./sm-icon.png") no-repeat
-        background-size 40%
-        background-position 50% 50%
+      a
+        .cart-back-btn
+          float left
+          height 46px
+          width 37px
+          background url("./sm-icon.png") no-repeat
+          background-size 40%
+          background-position 50% 50%
       .cart-span
         font-size 22px
         width 80%
@@ -205,8 +225,9 @@
             border: 1px solid #e7e7e7;
             background: #fff
             font-size: 14px;
-            text-align center
             outline none
+          input::-ms-input-placeholder{text-align: center;}
+          input::-webkit-input-placeholder{text-align: center;}
           .exch-btn
             width: 19%;
             height: 36px
@@ -219,6 +240,7 @@
             color: #6fbd00;
             letter-spacing: 5px
             text-indent: 5px
+            outline none
             border: 1px solid #6fbd00;
       .wrap-nodata
         background-color: #f2f2f2

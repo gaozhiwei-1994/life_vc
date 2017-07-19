@@ -3,68 +3,85 @@
     <header>
       <h2>闲逛</h2>
     </header>
-    <div class="walk-all-item">
-      <div class="walk-item" v-for="item in stroll">
-        <div class="walk-type-item">
-          <div class="walk-item-layer">
-            <img :src="item.url" />
-            <span>New</span>
+    <div ref="stroll">
+      <mt-loadmore :top-method="loadTop" ref="loadmore"
+                   :bottom-method="loadBottom">
+        <div>
+          <div class="walk-all-item">
+            <div class="walk-item" v-for="item in stroll">
+              <div class="walk-type-item">
+                <div class="walk-item-layer">
+                  <img :src="item.url" />
+                  <span>New</span>
+                </div>
+                <h3 class="walk-item-title">
+                  <a href="javascript:;">{{item.name}}</a>
+                </h3>
+                <div class="walk-price-bar">
+                  <span class="walk-price">￥{{item.price}}</span>
+                  <span class="walk-comment">月销 {{item.price}}</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <h3 class="walk-item-title">
-            <a href="javascript:;">{{item.name}}</a>
-          </h3>
-          <div class="walk-price-bar">
-            <span class="walk-price">￥{{item.price}}</span>
-            <span class="walk-comment">月销 {{item.price}}</span>
+          <div class="walk-all-item">
+            <div class="cat-wrap">
+              <div class="walk-cat"><span>49元包1年</span></div>
+              <div class="walk-cat"><span>今日新品</span></div>
+              <div class="walk-cat"><span>送500元积分</span></div>
+              <div class="walk-cat"><span>金币商城</span></div>
+            </div>
+            <div class="walk-item" v-for="item in reverseStroll">
+              <div class="walk-type-item">
+                <div class="walk-item-layer">
+                  <img :src="item.url" />
+                  <span>New</span>
+                </div>
+                <h3 class="walk-item-title">
+                  <a href="javascript:;">{{item.name}}</a>
+                </h3>
+                <div class="walk-price-bar">
+                  <span class="walk-price">￥{{item.price}}</span>
+                  <span class="walk-comment">月销 {{item.price}}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </mt-loadmore>
     </div>
-    <div class="walk-all-item">
-      <div class="cat-wrap">
-        <div class="walk-cat"><span>49元包1年</span></div>
-        <div class="walk-cat"><span>今日新品</span></div>
-        <div class="walk-cat"><span>送500元积分</span></div>
-        <div class="walk-cat"><span>金币商城</span></div>
-      </div>
-      <div class="walk-item" v-for="item in stroll.reverse()">
-        <div class="walk-type-item">
-          <div class="walk-item-layer">
-            <img :src="item.url" />
-            <span>New</span>
-          </div>
-          <h3 class="walk-item-title">
-            <a href="javascript:;">{{item.name}}</a>
-          </h3>
-          <div class="walk-price-bar">
-            <span class="walk-price">￥{{item.price}}</span>
-            <span class="walk-comment">月销 {{item.price}}</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <toTop></toTop>
   </div>
 </template>
 
 <script>
-  import axios from 'axios'
+  import { Loadmore } from 'mint-ui';
+  import toTop from '../toTop/toTop.vue'
   export default {
     props: ['stroll'],
-    /*data () {
-      return {
-        reverseStroll: []
+    methods: {
+      loadTop() {
+        this.$refs.loadmore.onTopLoaded();
+      },
+      loadBottom () {
+        this.$refs.loadmore.onBottomLoaded();
       }
-    },*/
-   /* created () {
-      axios.get('/api/stroll')
-        .then(response =>{
-          const result = response.data
-          if(result.code===0){
-            this.stroll = result.data
-          }
-          console.log(this.stroll)
+    },
+    computed: {
+      reverseStroll () {
+        const arr = []
+        this.stroll.filter(item =>{
+          arr.unshift(item)
         })
-    }*/
+//        console.log(arr)
+//        console.log(this.stroll)
+        return arr
+      }
+    },
+    components: {
+      'mt-loadmore': Loadmore,
+      toTop
+    }
   }
 </script>
 
@@ -82,6 +99,8 @@
       background-color #89BE48
       font-size 22px
       color #fff
+    .index-wrapper
+      z-index 9999999999999
     .walk-all-item
       margin-top 48px
       margin-bottom 48px

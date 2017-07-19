@@ -3,20 +3,20 @@
     <ul class="img-items">
       <li class="img-item" v-for="good in goods">
         <router-link to="">
-          <img :src="good.urlimg" alt="">
+          <img :src="good.image" alt="">
         </router-link>
         <div class="img-panel">
           <div class="img-title">{{good.name}}</div>
           <div class="img-details">
             <div class="img-price">
-              <span class="act-tag">限时体验价</span>
+              <span class="act-tag" v-show="good.promotion">限时体验价</span>
               <span>￥</span>
               <span>{{good.price}}</span>
-              <span class="img-old">{{good.oldprice}}</span>
-              <span class="ing-new">新</span>
+              <span class="img-old">{{good.oldPrice}}</span>
+              <span class="ing-new" v-show="good.active">{{good.active}}</span>
             </div>
             <div class="img-comment">
-              <span class="comment-content">评论&nbsp;:&nbsp{{good.comentNum}}</span>
+              <span class="comment-content">评论&nbsp;:&nbsp{{good.commentCount}}</span>
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
         width 100%
 
         img
-          width 100%
+         width 100%
       .img-panel
         width 100%
         background white
@@ -80,12 +80,4 @@
             display inline-block
             width 30%
             text-align right
-
-
-
-
-
-
-
-
 </style>

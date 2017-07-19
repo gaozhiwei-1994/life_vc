@@ -1,8 +1,8 @@
 <template>
    <div>
-     <div class="home-wrapper">
+     <div class="home-wrapper" id="homeWrapper" ref="homeWrapper">
        <div class="swipe">
-         <mt-swipe :auto="4000">
+         <mt-swipe :auto="2000">
            <mt-swipe-item>
              <img src="./1.jpg" alt="">
            </mt-swipe-item>
@@ -272,19 +272,20 @@
            </map>
          </div>
        </div>
-       <div class="toTop" v-show="true">
-         <a href="#"> &lt;</a>
-       </div>
+       <toTop></toTop>
      </div>
    </div>
 </template>
 
 <script>
+  import BScroll from 'better-scroll'
   import { Swipe, SwipeItem } from 'mint-ui';
+  import toTop from '../toTop/toTop.vue'
   export default {
     components: {
       'mt-swipe': Swipe,
-      'mt-swipe-item': SwipeItem
+      'mt-swipe-item': SwipeItem,
+      'toTop': toTop
     }
   }
 </script>
@@ -404,21 +405,5 @@
       height 1106px
       img
         width 100%
-  .toTop
-    width: 3rem;
-    height: 3rem;
-    line-height 3rem
-    background rgba(51,51,51,.3)
-    position fixed
-    right 2rem
-    bottom 6rem
-    border-radius 50%
-    text-align center
-    a
-      font-size 3rem
-      font-weight bold
-      color #ccc
-      display block
-      margin 0 auto
-      transform rotate(90deg)
+
 </style>

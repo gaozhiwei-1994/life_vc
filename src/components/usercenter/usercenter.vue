@@ -5,9 +5,12 @@
       <div class="header-content"></div>
       <div class="header-content">
         <p class="header-title">账户中心</p>
-        <a href="#">
+        <!--<a href="#">
           <label class="editcart">设置</label>
-        </a>
+        </a>-->
+        <router-link to="/setting">
+          <label class="editcart">设置</label>
+        </router-link>
       </div>
     </header>
     <div class="acct-user-wrap">

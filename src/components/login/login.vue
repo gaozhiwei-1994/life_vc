@@ -2,9 +2,10 @@
     <div>
       <div class="wrapper">
         <div class="top">
-          <router-link to="/usercenter">
+          <div class="goback" @click="reset"></div>
+          <!--<router-link to="/usercenter">
             <div class="goback" @click="reset"></div>
-          </router-link>
+          </router-link>-->
         </div>
         <div class="bottom">
           <div class="register-wrapper" v-show="isShow">
@@ -81,6 +82,7 @@
       },
       reset () {
         this.isShow = false
+        history.back()
       }
     }
   }
@@ -90,6 +92,8 @@
   .wrapper
     width 100%
     height 100%
+    position fixed
+    z-index 200
     .top
       position fixed
       left 0

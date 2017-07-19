@@ -1,6 +1,6 @@
 <template>
     <div>
-      <div class="wrapper">
+      <div class="all-wrapper">
         <div class="head-wrapper">
           <div class="header">
             <p>全部产品</p>
@@ -15,14 +15,20 @@
             </div>
           </div>
         </div>
-        <div class="content-wrapper">
-          <div class="content" v-for="subject in products">
+        <div class="content-wrapper" v-if="products">
+          <div class="content" v-for="subject in filterType">
             <div class="content-name">
-             {{subject.name}}
+             {{subject.type}}
             </div>
-            <ul class="content-list">
+            <!--<ul class="content-list">
               <li v-for="item in subject.cards">
                 <img :src="item.url" alt="">
+                <span>{{item.name}}</span>
+              </li>
+            </ul>-->
+            <ul class="content-list">
+              <li v-for="item in subject.goodsList">
+                <img :src="item.image" alt="">
                 <span>{{item.name}}</span>
               </li>
             </ul>
@@ -42,7 +48,7 @@
           isShow: false
         }
       },
-      created () {
+     /* created () {
           //console.log('cc',this.products)
         if(this.products.length!==0){
           this.products.forEach(p=>{
@@ -68,7 +74,7 @@
             console.log(p.cards)
           }
         })
-      },
+      },*/
       methods: {
         showInput () {
           this.isShow = !this.isShow
@@ -77,12 +83,17 @@
         showDiv () {
           this.isShow = !this.isShow
         }
+      },
+      computed: {
+        filterType () {
+          return this.products.filter(goodList=>goodList.id !== 2864)
+        }
       }
     }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  .wrapper
+  .all-wrapper
     width 100%
     height 100%
     background-color #F2F2F2
@@ -159,7 +170,7 @@
           font-size 20px
         .content-list
           overflow hidden
-          background-color #F2F2F2
+          background-color white
           li
             float: left;
             width: 33.3333%;
